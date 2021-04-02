@@ -1,0 +1,26 @@
+{
+  "name": "lighthouse-database-vrt-test",
+  "version": "1.0.0",
+  "description": "Testing environment to see if we can get lighthouse information on all websites of VRT",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samvermeir1606/lighthouse-database-vrt-test.git"
+  },
+  "keywords": [
+    "VRT"
+  ],
+  "author": "Sam Vermeir",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samvermeir1606/lighthouse-database-vrt-test/issues"
+  },
+  "homepage": "https://github.com/samvermeir1606/lighthouse-database-vrt-test#readme"
+}
