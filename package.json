@@ -4,7 +4,8 @@
   "description": "Testing environment to see if we can get lighthouse information on all websites of VRT",
   "main": "app.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg": "^8.5.1"
   },
   "devDependencies": {},
   "scripts": {
