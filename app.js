@@ -33,7 +33,7 @@ app.get('/testing/:websiteurl',function(req,res){
 	request.open("GET","https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.vrt.be/vrtnu/");
 	request.send();
 	request.onload=()=>{
-		console.log(request);
+		//console.log(request);
 		if (request.status===200) {
 			console.log("testing...");
 			jsontest=JSON.parse(request.response);
