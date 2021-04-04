@@ -27,12 +27,21 @@ app.listen(process.env.PORT || port, () => {
 
 
 // Add Row To Database
-//app.get('/testing/:websiteurl',function(req,res){
-//	client.query("SELECT * FROM scores;", (err, outcome) => {   
-//		if (err) throw err;
-//		console.log(outcome)
-//	})
-//})
+app.get('/testing/:websiteurl',function(req,res){
+	console.log("Testing websiteurl");
+	let request= new XMLHttpRequest();
+	request.open("GET","https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.vrt.be/vrtnu/");
+	request.send();
+	request.onload=()=>{
+		console.log(request);
+		if (request.status===200) {
+			console.log(JSON.parse(request.response));
+		}
+		else {
+			console.log('error ${request.status} ${request.statusText}');
+		}
+	}
+})
 
 app.get('/testing/showall',function(req,res){
 	client.query("SELECT * FROM scores;", (err, outcome) => {   
