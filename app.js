@@ -30,8 +30,12 @@ app.listen(process.env.PORT || port, () => {
 app.get('/testing/:websiteurl',function(req,res){
 	console.log("NEW Testing websiteurl");
 	var request = new XMLHttpRequest()
-	
+
+	console.log("Making reaquest");
+
+
 	request.open('GET', 'https://ghibliapi.herokuapp.com/films', true)
+	console.log("opening reaquest");
 	request.onload = function () {
 	  // Begin accessing JSON data here
 	  var data = JSON.parse(this.response)
@@ -44,10 +48,10 @@ app.get('/testing/:websiteurl',function(req,res){
 	    console.log('error')
 	  }
 	}
-	
+	console.log("Onload reaquest");
 	request.send()
-
-
+	console.log("Send reaquest");
+	res.send("DONE")
 
 
 
