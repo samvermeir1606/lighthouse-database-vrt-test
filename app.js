@@ -30,14 +30,24 @@ app.listen(process.env.PORT || port, () => {
 
 // Add Row To Database
 app.get('/testing/fetchingurl',function(req,res){
-	console.log("NEW Testing websiteurl");
+	console.log("Inserting new value into database");
 	fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.vrt.be/vrtnu/&category=accessibility&category=performance')
 	  .then(response => response.json())
 	  .then(data => {
-	  	//console.log(data)
-	  	//console.log("")
 	  	console.log(data.lighthouseResult.categories.accessibility.score)
-	  	res.send("DONE")});
+	  	res.send("DONE")
+
+		client.query("INSERT INTO scores(websiteurl, score, date, mainbrand) VALUES ('https://www.vrt.be/vrtnu/', "+data.lighthouseResult.categories.accessibility.score+",'"+Date()+"','VRT');", (err, outcome) => {   
+			if (err) throw err;
+			else {
+				res.send(outcome)
+				console.log("Insert requested: responded SUCCESS")
+			}
+		})
+
+
+
+	  });
 
 
 
