@@ -5,6 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
     "pg": "^8.5.1",
     "xmlhttprequest": "^1.8.0"
   },

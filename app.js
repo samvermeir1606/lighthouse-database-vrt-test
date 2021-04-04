@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const fetch = require("node-fetch");
+
 
 const { Client } = require('pg');
 //
@@ -27,34 +29,15 @@ app.listen(process.env.PORT || port, () => {
 
 
 // Add Row To Database
-app.get('/testing/:websiteurl',function(req,res){
+app.get('/testing/fetchingurl',function(req,res){
 	console.log("NEW Testing websiteurl");
-	var request = new XMLHttpRequest()
-
-	console.log("Making reaquest");
-
-
-	request.open('GET', 'https://ghibliapi.herokuapp.com/films', true)
-	console.log("opening reaquest");
-	request.onload = function () {
-		console.log("Inside OnLoad");
-		// Begin accessing JSON data here
-		var data = JSON.parse(this.response)
-		console.log("Data Processed OnLoad");
-		if (request.status >= 200 && request.status < 400) {
-			console.log("Inside status");
-		  	data.forEach((movie) => {
-		    	console.log(movie.title)
-		  	})
-		} else {
-		  console.log('error')
-		}
-	}
-	console.log("Onload reaquest");
-	request.send()
-	console.log("Send reaquest");
-	res.send("DONE")
-
+	fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.vrt.be/vrtnu/&category=accessibility&category=performance')
+	  .then(response => response.json())
+	  .then(data => {
+	  	//console.log(data)
+	  	//console.log("")
+	  	console.log(data.lighthouseResult.categories.accessibility.score)
+	  	res.send("DONE")});
 
 
 
