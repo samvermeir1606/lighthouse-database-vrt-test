@@ -41,7 +41,7 @@ app.get('/testing/fetchingurl',function(req,res){
 		client.query("INSERT INTO scores(websiteurl, score, date, mainbrand) VALUES ('https://www.vrt.be/vrtnu/', "+data.lighthouseResult.categories.accessibility.score+",'"+formatedMysqlString +"','VRT');", (err, outcome) => {   
 			if (err) throw err;
 			else {
-				res.send(outcome)
+				//res.send(outcome)
 				console.log("Insert requested: responded SUCCESS")
 			}
 		})
