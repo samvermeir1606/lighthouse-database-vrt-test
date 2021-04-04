@@ -36,8 +36,9 @@ app.get('/testing/fetchingurl',function(req,res){
 	  .then(data => {
 	  	console.log(data.lighthouseResult.categories.accessibility.score)
 	  	res.send("DONE")
+		var formatedMysqlString = (new Date ((new Date((new Date(new Date())).toISOString() )).getTime() - ((new Date()).getTimezoneOffset()*60000))).toISOString().slice(0, 19).replace('T', ' ');
 
-		client.query("INSERT INTO scores(websiteurl, score, date, mainbrand) VALUES ('https://www.vrt.be/vrtnu/', "+data.lighthouseResult.categories.accessibility.score+",'"+Date().toMysqlFormat() +"','VRT');", (err, outcome) => {   
+		client.query("INSERT INTO scores(websiteurl, score, date, mainbrand) VALUES ('https://www.vrt.be/vrtnu/', "+data.lighthouseResult.categories.accessibility.score+",'"+formatedMysqlString +"','VRT');", (err, outcome) => {   
 			if (err) throw err;
 			else {
 				res.send(outcome)
