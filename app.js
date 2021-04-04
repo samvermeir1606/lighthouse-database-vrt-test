@@ -28,26 +28,49 @@ app.listen(process.env.PORT || port, () => {
 
 // Add Row To Database
 app.get('/testing/:websiteurl',function(req,res){
-	console.log("Testing websiteurl");
-	let request= new XMLHttpRequest();
-	request.open("GET","https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.vrt.be/vrtnu/&category=accessibility&category=performance");
-	request.send();
-	request.onload=()=>{
-		//console.log(request);
-		if (request.status===200) {
-			console.log("testing...");
-			//let jsontest=JSON.parse(request);
-			console.log("Done Parsing..");
-			//console.log(jsontest.lighthouseResult.categories.accessibility.score)
-			//console.log(JSON.parse(request.response));
-			console.log("testing DONE!!!");
-		}
-		else {
-			console.log('error ${request.status} ${request.statusText}');
-		}
-		console.log(request.response.lighthouseResult);
-		//console.log(request.lighthouseResult);
+	console.log("NEW Testing websiteurl");
+
+	// Create a request variable and assign a new XMLHttpRequest object to it.
+	var request = new XMLHttpRequest()
+	
+	// Open a new connection, using the GET request on the URL endpoint
+	request.open('GET', 'https://ghibliapi.herokuapp.com/films', true)
+	
+	request.onload = function () {
+		console.log("OnLoad function");
+	  // Begin accessing JSON data here
+		var data = JSON.parse(this.response)
+		console.log(data.lighthouseResult.categories.accessibility.score)
 	}
+	
+	// Send request
+	request.send()
+
+
+
+
+
+
+	//console.log("Testing websiteurl");
+	//let request= new XMLHttpRequest();
+	//request.open("GET","https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.vrt.be/vrtnu/&category=accessibility&category=performance");
+	//request.send();
+	//request.onload=()=>{
+	//	//console.log(request);
+	//	if (request.status===200) {
+	//		console.log("testing...");
+	//		//let jsontest=JSON.parse(request);
+	//		console.log("Done Parsing..");
+	//		//console.log(jsontest.lighthouseResult.categories.accessibility.score)
+	//		//console.log(JSON.parse(request.response));
+	//		console.log("testing DONE!!!");
+	//	}
+	//	else {
+	//		console.log('error ${request.status} ${request.statusText}');
+	//	}
+	//	console.log(request.response.lighthouseResult);
+	//	//console.log(request.lighthouseResult);
+	//}
 })
 
 app.get('/testing/showall',function(req,res){
