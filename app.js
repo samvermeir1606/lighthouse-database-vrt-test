@@ -45,7 +45,7 @@ app.get('/testing/:websiteurl',function(req,res){
 		else {
 			console.log('error ${request.status} ${request.statusText}');
 		}
-		console.log(request.lighthouseResult);
+		console.log(request.response.lighthouseResult);
 		//console.log(request.lighthouseResult);
 	}
 })
