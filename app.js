@@ -30,7 +30,7 @@ app.listen(process.env.PORT || port, () => {
 app.get('/testing/:websiteurl',function(req,res){
 	console.log("Testing websiteurl");
 	let request= new XMLHttpRequest();
-	request.open("GET","https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.vrt.be/vrtnu/");
+	request.open("GET","https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.vrt.be/vrtnu/&category=accessibility&category=performance");
 	request.send();
 	request.onload=()=>{
 		//console.log(request);
@@ -45,6 +45,7 @@ app.get('/testing/:websiteurl',function(req,res){
 		else {
 			console.log('error ${request.status} ${request.statusText}');
 		}
+		console.log(request.lighthouseResult.categories.accessibility.score);
 	}
 })
 
