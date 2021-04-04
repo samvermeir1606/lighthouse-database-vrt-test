@@ -36,9 +36,9 @@ app.get('/testing/:websiteurl',function(req,res){
 		console.log(request);
 		if (request.status===200) {
 			console.log("testing...");
-			json=JSON.parse(request.response);
+			jsontest=JSON.parse(request.response);
 			console.log("Done Parsing..");
-			console.log(json.lighthouseResult.categories.accessibility.score)
+			//console.log(jsontest.lighthouseResult.categories.accessibility.score)
 			//console.log(JSON.parse(request.response));
 			console.log("testing DONE!!!");
 		}
