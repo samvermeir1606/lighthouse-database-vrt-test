@@ -37,16 +37,18 @@ app.get('/testing/:websiteurl',function(req,res){
 	request.open('GET', 'https://ghibliapi.herokuapp.com/films', true)
 	console.log("opening reaquest");
 	request.onload = function () {
-	  // Begin accessing JSON data here
-	  var data = JSON.parse(this.response)
-	
-	  if (request.status >= 200 && request.status < 400) {
-	    data.forEach((movie) => {
-	      console.log(movie.title)
-	    })
-	  } else {
-	    console.log('error')
-	  }
+		console.log("Inside OnLoad");
+		// Begin accessing JSON data here
+		var data = JSON.parse(this.response)
+		console.log("Data Processed OnLoad");
+		if (request.status >= 200 && request.status < 400) {
+			console.log("Inside status");
+		  	data.forEach((movie) => {
+		    	console.log(movie.title)
+		  	})
+		} else {
+		  console.log('error')
+		}
 	}
 	console.log("Onload reaquest");
 	request.send()
