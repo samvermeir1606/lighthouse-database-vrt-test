@@ -38,7 +38,7 @@ app.get('/testing/showall',function(req,res){
 	client.query("SELECT * FROM scores;", (err, outcome) => {   
 		if (err) throw err;
 		else {
-			res.send("DONE")
+			res.send(outcome)
 			console.log("ShowAll requested: responded SUCCESS")
 		}
 	})
