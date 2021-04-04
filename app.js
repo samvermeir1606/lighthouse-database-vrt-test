@@ -45,7 +45,8 @@ app.get('/testing/:websiteurl',function(req,res){
 		else {
 			console.log('error ${request.status} ${request.statusText}');
 		}
-		console.log(request.lighthouseResult.categories.accessibility.score);
+		console.log(request.lighthouseResult);
+		//console.log(request.lighthouseResult);
 	}
 })
 
