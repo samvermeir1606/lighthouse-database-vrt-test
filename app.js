@@ -35,7 +35,12 @@ app.get('/testing/:websiteurl',function(req,res){
 	request.onload=()=>{
 		console.log(request);
 		if (request.status===200) {
-			console.log(JSON.parse(request.response));
+			console.log("testing...");
+			json=JSON.parse(request.response);
+			console.log("Done Parsing..");
+			console.log(json.lighthouseResult.categories.accessibility.score)
+			//console.log(JSON.parse(request.response));
+			console.log("testing DONE!!!");
 		}
 		else {
 			console.log('error ${request.status} ${request.statusText}');
