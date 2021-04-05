@@ -124,6 +124,26 @@ app.get('/database/showall',function(req,res){
 	})
 })
 
+app.get('/database/showweburl/:websiteurl',function(req,res){
+	client.query("SELECT * FROM scores WHERE websiteurl = "+req.params.websiteurl+";", (err, outcome) => {   
+		if (err) throw err;
+		else {
+			res.send(outcome)
+			console.log("showweburl requested: responded SUCCESS")
+		}
+	})
+})
+
+app.get('/database/showid/:row_id',function(req,res){
+	client.query("SELECT * FROM scores WHERE row_id = "+req.params.row_id+";", (err, outcome) => {   
+		if (err) throw err;
+		else {
+			res.send(outcome)
+			console.log("showid requested: responded SUCCESS")
+		}
+	})
+})
+
 app.get('/database/deleteall',function(req,res){
 	client.query("DELETE FROM scores WHERE row_id > 0;", (err, outcome) => {   
 		if (err) throw err;
