@@ -63,6 +63,7 @@ function FetchingURL(url,mainbrand,res){
 		.then(response => response.json())
 		.then(data => {
 			console.log("Fetching PageSpeed info for url: "+url+" SUCCEEDED with score of: "+data.lighthouseResult.categories.accessibility.score*100)
+			console.log(data.lighthouseResult.categories.accessibility.score)
 			AddToDatabase(url,data.lighthouseResult.categories.accessibility.score*100,mainbrand)
 			res.send("DONE")
 			console.log("DONE")
