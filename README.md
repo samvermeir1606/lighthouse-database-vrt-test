@@ -1,5 +1,9 @@
-# lighthouse-database-vrt-test
-This is the code for a server that is currently running on Heroku. The endpoints of the server are connected to a list of cronjobs at https://console.cron-job.org/jobs 
+# VRT Lighthouse Scores
+Using the API of PageSpeed (lighthouse) and Cron-jobs, I have made a server that takes the "accessibility"-scores of a set of urls and add them to a Postgres Database attached to this server. Each set amount of time, the cron jobs execute and the database gets filled. The reason for this is to have a record of how well our sites perform according to PageSpeed (powered by Google Lighthouse).
+This is a personal project, I do not own the contents of any of those sites.
+This server is currently running on Heroku, at the following url: https://sheltered-shelf-81281.herokuapp.com/.
+Going to the url will give you a list of all the rows in the database, in a JSON format. To make sure the database gets filled with the right data, all the endpoints are hooked up to a cron job at https://console.cron-job.org/jobs.
+
 ## Currently running Cronjobs
 | Status | Execution moment | Brand | Main Brand | Endpoint |
 | --- | --- | --- | --- | --- |
@@ -59,6 +63,7 @@ This is the code for a server that is currently running on Heroku. The endpoints
 | /database/deleteone/:row_id | Deletes the entry with the given row_id as parameter (USE CAUTION) |
 
 
+## Export Database
 To export the PostgrSQL database locally
 1) Go to the folder (in the terminal), and use the command:
 heroku pg:psql
@@ -66,3 +71,48 @@ heroku pg:psql
 3) In the terminal, write: 
 \copy (SELECT * FROM scores) to '/Users/vermeis/Downloads/exportDatabase.csv' with csv
 4) Open the csv file in your file system
+
+
+## How To's
+### How to get access to the database endpoints
+There are two ways you can have access:
+1) Go to the main link (https://sheltered-shelf-81281.herokuapp.com/) and you'll get a list of all rows
+2) Using Postman
+Using Postman, you can ame a new request my adding the main link (https://sheltered-shelf-81281.herokuapp.com/) and an endpoint url together:
+```https://sheltered-shelf-81281.herokuapp.com/database/showall```
+
+### How to get the server logs in the terminal
+Assuming the project is already cloned from github.
+1) Open a terminal and "cd" to the right folder
+2) perform the following command in the console:
+```heroku logs --tail```
+A list of all the logs will show up
+
+### How to push changed to Heroku and start a new build
+Assuming the project is already cloned from github
+1) Commit and push any changed made using Github Desktop
+2) Open the terminal, go to the right directory of the project and perform the following command:
+```git push heroku main```
+
+### How to see and interact with the database locally
+Assuming the project is already cloned from github
+1) Open a terminal and navigate to the right directory
+2) Use the following command to interact with the database:
+```heroku pg:psql```
+When you have done this, you should be able to interact with the database and perform querries like for example:
+```CREATE TABLE scores (row_id serial PRIMARY KEY,websiteurl VARCHAR ( 255 ) NOT NULL,score INT NOT NULL,date TIMESTAMP NOT NULL,mainbrand VARCHAR ( 255 ) NOT NULL);```
+```INSERT INTO scores(websiteurl, score, date, mainbrand) VALUES ('https://www.vrt.be/vrtnu/', 80, '2021-04-04 10:57:40','VRT');```
+3) to quit interacting with the database, write following command:
+```\q```
+4) To see information about the database, execute following command:
+```heroku pg:info```
+
+
+
+
+
+
+
+
+
+
