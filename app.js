@@ -29,49 +29,16 @@ app.listen(process.env.PORT || port, () => {
 
 
 // Add Row To Database
-app.get('/testing/fetchingurl',function(req,res){
-	console.log("Inserting new value into database");
-	fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.vrt.be/vrtnu/&category=accessibility&category=performance')
+app.get('/urls/vrtnu/home',function(req,res){
+	var url="https://www.vrt.be/vrtnu/"
+	console.log("Fetching PageSpeed info for url: "+url);
+	fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url='+url+'&category=accessibility')
 	  .then(response => response.json())
 	  .then(data => {
-	  	console.log(data.lighthouseResult.categories.accessibility.score)
+	  	console.log("Fetching PageSpeed info for url: "+url" SUCCEEDED with score of: "+data.lighthouseResult.categories.accessibility.score)
+	  	AddToDatabase(url,data.lighthouseResult.categories.accessibility.score,"VRT")
 	  	res.send("DONE")
-		var formatedMysqlString = (new Date ((new Date((new Date(new Date())).toISOString() )).getTime() - ((new Date()).getTimezoneOffset()*60000))).toISOString().slice(0, 19).replace('T', ' ');
-
-		client.query("INSERT INTO scores(websiteurl, score, date, mainbrand) VALUES ('https://www.vrt.be/vrtnu/', "+data.lighthouseResult.categories.accessibility.score*100+",'"+formatedMysqlString +"','VRT');", (err, outcome) => {   
-			if (err) throw err;
-			else {
-				//res.send(outcome)
-				console.log("Insert requested: responded SUCCESS")
-			}
-		})
-
-
-
 	  });
-
-
-
-	//console.log("Testing websiteurl");
-	//let request= new XMLHttpRequest();
-	//request.open("GET","https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://www.vrt.be/vrtnu/&category=accessibility&category=performance");
-	//request.send();
-	//request.onload=()=>{
-	//	//console.log(request);
-	//	if (request.status===200) {
-	//		console.log("testing...");
-	//		//let jsontest=JSON.parse(request);
-	//		console.log("Done Parsing..");
-	//		//console.log(jsontest.lighthouseResult.categories.accessibility.score)
-	//		//console.log(JSON.parse(request.response));
-	//		console.log("testing DONE!!!");
-	//	}
-	//	else {
-	//		console.log('error ${request.status} ${request.statusText}');
-	//	}
-	//	console.log(request.response.lighthouseResult);
-	//	//console.log(request.lighthouseResult);
-	//}
 })
 
 app.get('/testing/showall',function(req,res){
@@ -88,8 +55,17 @@ app.get('/testing/showall',function(req,res){
 
 
 
+function AddToDatabase(url,score,mainbrand) {
+	console.log("Adding Entry to the database...")
+	var formatedMysqlString = (new Date ((new Date((new Date(new Date())).toISOString() )).getTime() - ((new Date()).getTimezoneOffset()*60000))).toISOString().slice(0, 19).replace('T', ' ');
 
-
+	client.query("INSERT INTO scores(websiteurl, score, date, mainbrand) VALUES ('"+url+"', "+score*100+",'"+formatedMysqlString +"','"+mainbrand+"');", (err, outcome) => {   
+		if (err) throw err;
+		else {
+			console.log("Adding Entry to the database... SUCCEEDED")
+		}
+	})
+}
 
 
 /**
