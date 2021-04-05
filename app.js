@@ -27,56 +27,56 @@ app.get('/', (req, res) => {
 				//res.send(outcome)
 
 
-				//var out=""
-				//out+="ALL DATA FROM DATABASE\n"
-				//out+="----------------------\n"
-				////calculating header width
-				//var rowWidth_rowID=7;
-				//var rowWidth_websiteURL=0;
-				//for (var i = 0; i < outcome.rows.length; i++) {
-				//	if (rowWidth_websiteURL<outcome.rows[i].websiteurl.length) {
-				//		rowWidth_websiteURL=outcome.rows[i].websiteurl.length;
-				//	}
-				//	
-				//}
-				//rowWidth_websiteURL+=2;
-				//
-				//var rowWidth_score=7;
-				//var rowWidth_date=26;
-				//var rowWidth_mainbrand=0;
-				//for (var i = 0; i < outcome.rows.length; i++) {
-				//	if (rowWidth_mainbrand<outcome.rows[i].mainbrand.length) {
-				//		rowWidth_mainbrand=outcome.rows[i].mainbrand.length;
-				//	}
-				//	
-				//}
-				//rowWidth_mainbrand+=2;
-				//
-				////headers
-				//out+=" row_ID | ";
-				//for (var i = 0; i < (rowWidth_websiteURL-10)/2; i++) {
-				//	out+=" "
-				//}
-				//out+="websiteUrl"
-				//for (var i = 0; i < (rowWidth_websiteURL-10)/2; i++) {
-				//	out+=" "
-				//}
-				//out+="| score |           date           |"
-				//
-				//if (rowWidth_mainbrand<=9) {
-				//	out+=" mainBrand |"
-				//}
-				//else{
-				//	for (var i = 0; i < (rowWidth_mainbrand-9)/2; i++) {
-				//		out+=" "
-				//	}
-				//	out+="mainBrand"
-				//	for (var i = 0; i < (rowWidth_mainbrand-9)/2; i++) {
-				//		out+=" "
-				//	}
-				//}
-				//out+="\n"
-				//
+				var out=""
+				out+="ALL DATA FROM DATABASE\n"
+				out+="----------------------\n"
+				//calculating header width
+				var rowWidth_rowID=7;
+				var rowWidth_websiteURL=0;
+				for (var i = 0; i < outcome.rows.length; i++) {
+					if (rowWidth_websiteURL<outcome.rows[i].websiteurl.length) {
+						rowWidth_websiteURL=outcome.rows[i].websiteurl.length;
+					}
+					
+				}
+				rowWidth_websiteURL+=2;
+				
+				var rowWidth_score=7;
+				var rowWidth_date=26;
+				var rowWidth_mainbrand=0;
+				for (var i = 0; i < outcome.rows.length; i++) {
+					if (rowWidth_mainbrand<outcome.rows[i].mainbrand.length) {
+						rowWidth_mainbrand=outcome.rows[i].mainbrand.length;
+					}
+					
+				}
+				rowWidth_mainbrand+=2;
+				
+				//headers
+				out+=" row_ID | ";
+				for (var i = 0; i < (rowWidth_websiteURL-10)/2; i++) {
+					out+=" "
+				}
+				out+="websiteUrl"
+				for (var i = 0; i < (rowWidth_websiteURL-10)/2; i++) {
+					out+=" "
+				}
+				out+="| score |           date           |"
+				
+				if (rowWidth_mainbrand<=9) {
+					out+=" mainBrand |"
+				}
+				else{
+					for (var i = 0; i < (rowWidth_mainbrand-9)/2; i++) {
+						out+=" "
+					}
+					out+="mainBrand"
+					for (var i = 0; i < (rowWidth_mainbrand-9)/2; i++) {
+						out+=" "
+					}
+				}
+				out+="\n"
+				
 				////populating table
 				//for (var i = 0; i < outcome.rows.length; i++) {
 				//	//ROW ID
@@ -134,9 +134,9 @@ app.get('/', (req, res) => {
 
 
 
-				//res.send(out)
+				res.send(out)
 				
-				res.send("test")
+				//res.send("test")
 				
 
 				//res.send("ShowAll requested: responded SUCCESS")
