@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PostgreSQL SELECT Example 1</title>
+<meta name="description" content="If we want to fetch all rows from the actor table the following PostgreSQL SELECT statement can be used.">
+</head>
+<body>
+<h1>List of all actors in the table</h1>
+<?php
+$db = pg_connect("host=localhost port=5432 dbname=w3r user=w3r_admin password=admin123");
+$result = pg_query($db,"SELECT * FROM scores");
+echo "<table>";
+while($row=pg_fetch_assoc($result)){echo "<tr>";
+echo "<td align='center' width='200'>" . $row['row_id'] . "</td>";
+echo "<td align='center' width='200'>" . $row['websiteurl'] . "</td>";
+echo "<td align='center' width='200'>" . $row['score'] . "</td>";
+echo "<td align='center' width='200'>" . $row['date'] . "</td>";
+echo "<td align='center' width='200'>" . $row['mainbrand'] . "</td>";
+echo "</tr>";}echo "</table>";?>
+</div>
+</body>
+</html>
