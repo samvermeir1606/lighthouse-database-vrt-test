@@ -8,7 +8,7 @@
 <body>
 <h1>List of all actors in the table</h1>
 <?php
-$db = pg_connect("host=postgres://nbjbehqkdvywhz:7ee702d1f64efc7f9be8dcd45ee566a7386af2618562f2ad46d7b3a999ef6a62@ec2-108-128-104-50.eu-west-1.compute.amazonaws.com:5432/d7kcj00l9qlt0i port=5432");
+$db = pg_connect("host=localhost dbname=postgresql-flat-69046 user=sam.vermeir@hotmail.com password=azertyX007");
 $result = pg_query($db,"SELECT * FROM scores");
 echo "<table>";
 while($row=pg_fetch_assoc($result)){echo "<tr>";
