@@ -30,15 +30,19 @@ app.listen(process.env.PORT || port, () => {
 
 // Add Row To Database
 app.get('/urls/vrtnu/home',function(req,res){
-	var url="https://www.vrt.be/vrtnu/"
-	console.log("Fetching PageSpeed info for url: "+url);
-	fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url='+url+'&category=accessibility')
-		.then(response => response.json())
-		.then(data => {
-			console.log("Fetching PageSpeed info for url: "+url+" SUCCEEDED with score of: "+data.lighthouseResult.categories.accessibility.score)
-			AddToDatabase(url,data.lighthouseResult.categories.accessibility.score,"VRT")
-			res.send("DONE")
-	  });
+	FetchingURL("https://www.vrt.be/vrtnu/","VRT",res)
+})
+app.get('/urls/vrtnu/tvgids',function(req,res){
+	FetchingURL("https://www.vrt.be/vrtnu/tv-gids/","VRT",res)
+})
+app.get('/urls/vrtnu/az',function(req,res){
+	FetchingURL("https://www.vrt.be/vrtnu/a-z/#searchtype=programs","VRT",res)
+})
+app.get('/urls/vrtnu/categorie',function(req,res){
+	FetchingURL("https://www.vrt.be/vrtnu/categorieen/","VRT",res)
+})
+app.get('/urls/vrtnu/livestream',function(req,res){
+	FetchingURL("https://www.vrt.be/vrtnu/livestream/","VRT",res)
 })
 
 app.get('/testing/showall',function(req,res){
@@ -53,13 +57,23 @@ app.get('/testing/showall',function(req,res){
 })
 
 
-
+function FetchingURL(url,mainbrand,res){
+	console.log("Fetching PageSpeed info for url: "+url);
+	fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url='+url+'&category=accessibility')
+		.then(response => response.json())
+		.then(data => {
+			console.log("Fetching PageSpeed info for url: "+url+" SUCCEEDED with score of: "+data.lighthouseResult.categories.accessibility.score*100)
+			AddToDatabase(url,data.lighthouseResult.categories.accessibility.score*100,mainbrand)
+			res.send("DONE")
+			console.log("DONE")
+	  });
+}
 
 function AddToDatabase(url,score,mainbrand) {
 	console.log("Adding Entry to the database...")
 	var formatedMysqlString = (new Date ((new Date((new Date(new Date())).toISOString() )).getTime() - ((new Date()).getTimezoneOffset()*60000))).toISOString().slice(0, 19).replace('T', ' ');
 
-	client.query("INSERT INTO scores(websiteurl, score, date, mainbrand) VALUES ('"+url+"', "+score*100+",'"+formatedMysqlString +"','"+mainbrand+"');", (err, outcome) => {   
+	client.query("INSERT INTO scores(websiteurl, score, date, mainbrand) VALUES ('"+url+"', "+score+",'"+formatedMysqlString +"','"+mainbrand+"');", (err, outcome) => {   
 		if (err) throw err;
 		else {
 			console.log("Adding Entry to the database... SUCCEEDED")
