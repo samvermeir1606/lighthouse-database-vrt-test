@@ -33,11 +33,11 @@ app.get('/urls/vrtnu/home',function(req,res){
 	var url="https://www.vrt.be/vrtnu/"
 	console.log("Fetching PageSpeed info for url: "+url);
 	fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url='+url+'&category=accessibility')
-	  .then(response => response.json())
-	  .then(data => {
-	  	console.log("Fetching PageSpeed info for url: "+url" SUCCEEDED with score of: "+data.lighthouseResult.categories.accessibility.score)
-	  	AddToDatabase(url,data.lighthouseResult.categories.accessibility.score,"VRT")
-	  	res.send("DONE")
+		.then(response => response.json())
+		.then(data => {
+			console.log("Fetching PageSpeed info for url: "+url+" SUCCEEDED with score of: "+data.lighthouseResult.categories.accessibility.score)
+			AddToDatabase(url,data.lighthouseResult.categories.accessibility.score,"VRT")
+			res.send("DONE")
 	  });
 })
 
