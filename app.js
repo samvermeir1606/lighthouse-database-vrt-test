@@ -20,7 +20,7 @@ client.connect();
 
 app.get('/', (req, res) => {
   //res.send('Hello World!')
-  res.sendFile(path.join(__dirname + '/index.php'));
+  res.sendFile(path.join(__dirname + '/home.html'));
 	//client.query("SELECT * FROM scores;", (err, outcome) => {   
 	//		if (err) throw err;
 	//		else {
