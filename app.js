@@ -24,7 +24,19 @@ app.get('/', (req, res) => {
 	client.query("SELECT * FROM scores;", (err, outcome) => {   
 			if (err) throw err;
 			else {
-				res.send(outcome)
+				//res.send(outcome)
+				var out=""
+				out+="ALL DATA FROM DATABASE"
+				out+="----------------------"
+				var rowWidth_rowID=5;
+				var rowWidth_websiteURL=0;
+				for (var i = 0; i < outcome.rows.length; i++) {
+					if (rowWidth_websiteURL<outcome.rows[i].websiteurl.length) {
+						rowWidth_websiteURL=outcome.rows[i].websiteurl.length;
+					}
+					
+				}
+				res.send(rowWidth_websiteURL)
 				//res.send("ShowAll requested: responded SUCCESS")
 			}
 		})
