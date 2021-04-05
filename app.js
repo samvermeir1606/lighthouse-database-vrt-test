@@ -64,29 +64,65 @@ function exportToCsv(filename, rows) {
 
 app.get("/exportData", function (request, result) {
  
-        var data = [{
-            "id": 1,
-            "name": "Adnan",
-            "age": 29
-        }, {
-            "id": 2,
-            "name": "Ali",
-            "age": 31
-        }, {
-            "id": 3,
-            "name": "Ahmad",
-            "age": 33
-        }];
- 
-        var ws = fileSystem.createWriteStream("public/data.csv");
-        fastcsv
-            .write(data, { headers: true })
-            .on("finish", function() {
- 
-                result.send("<a href='/public/data.csv' download='data.csv' id='download-link'></a><script>document.getElementById('download-link').click();</script>");
-            })
-            .pipe(ws);
+
+// Start file download.
+download("hello.txt","This is the content of my file :)");
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get('/', (req, res) => {
 
@@ -94,15 +130,15 @@ app.get('/', (req, res) => {
 
 
 
-	client.query("SELECT * FROM scores;", (err, outcome) => {   
-		if (err) throw err;
-		else {
-			exportToCsv('lighthouseDatabase.csv',outcome.rows)
-			//res.send(outcome)
-			res.send("done")
-			console.log("done")
-		}
-	})
+	//client.query("SELECT * FROM scores;", (err, outcome) => {   
+	//	if (err) throw err;
+	//	else {
+	//		exportToCsv('lighthouseDatabase.csv',outcome.rows)
+	//		//res.send(outcome)
+	//		res.send("done")
+	//		console.log("done")
+	//	}
+	//})
 
 
 
