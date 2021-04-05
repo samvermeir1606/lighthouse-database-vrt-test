@@ -19,7 +19,18 @@ client.connect();
 
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  //res.send('Hello World!')
+
+	client.query("SELECT * FROM scores;", (err, outcome) => {   
+			if (err) throw err;
+			else {
+				res.send(outcome)
+				//res.send("ShowAll requested: responded SUCCESS")
+			}
+		})
+
+
+
 })
 
 app.listen(process.env.PORT || port, () => {
