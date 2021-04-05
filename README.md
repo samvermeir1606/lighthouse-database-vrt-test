@@ -4,7 +4,7 @@ This is a personal project, I do not own the contents of any of those sites.
 This server is currently running on Heroku, at the following url: https://sheltered-shelf-81281.herokuapp.com/.
 Going to the url will give you a list of all the rows in the database, in a JSON format. To make sure the database gets filled with the right data, all the endpoints are hooked up to a cron job at https://console.cron-job.org/jobs.
 To edit the server (or start any updates or changed that you would like to do), start at "app.js"
-
+Cron-job status can be viewed on this status page: https://y9l793ff.status.cron-job.org/
 ## Currently running Cronjobs
 | Status | Execution moment | Brand | Main Brand | Endpoint |
 | --- | --- | --- | --- | --- |
