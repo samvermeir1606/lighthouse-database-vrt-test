@@ -2,6 +2,7 @@
 This is the code for a server that is currently running on Heroku. The endpoints of the server are connected to a list of cronjobs at https://console.cron-job.org/jobs 
 ## Currently running Cronjobs
 | Status | Execution moment | Brand | Main Brand | Endpoint |
+| --- | --- | --- | --- | --- |
 | On | Monday 06:00 | VRT NU | VRT | /urls/vrtnu/home |
 | On | Monday 06:05 | VRT NU | VRT | /urls/vrtnu/tvgids |
 | On | Monday 06:10 | VRT NU | VRT | /urls/vrtnu/az |
@@ -26,6 +27,7 @@ This is the code for a server that is currently running on Heroku. The endpoints
 ## Currently available endpoints
 ### URL Endpoints
 | Endpoint | Brand | MainBrand |
+| --- | --- | --- |
 | /urls/vrtnu/home | VRT NU | VRT |
 | /urls/vrtnu/tvgids | VRT NU | VRT |
 | /urls/vrtnu/az | VRT NU | VRT |
@@ -49,6 +51,7 @@ This is the code for a server that is currently running on Heroku. The endpoints
 
 ### Database Endpoints
 | Endpoint | Action |
+| --- | --- |
 | /database/showall | This prints out a list of all the rows in the database (in JSON format) |
 | /database/showweburl/:websiteurl | Prints out all the rows with the given "websiteURL" parameter |
 | /database/showid/:row_id | Prints out the row with that specific id (given in the parameter) |
