@@ -21,256 +21,15 @@ client.connect();
 
 
 
-function exportToCsv(filename, rows) {
-        var processRow = function (row) {
-            var finalVal = '';
-            for (var j = 0; j < row.length; j++) {
-                var innerValue = row[j] === null ? '' : row[j].toString();
-                if (row[j] instanceof Date) {
-                    innerValue = row[j].toLocaleString();
-                };
-                var result = innerValue.replace(/"/g, '""');
-                if (result.search(/("|,|\n)/g) >= 0)
-                    result = '"' + result + '"';
-                if (j > 0)
-                    finalVal += ',';
-                finalVal += result;
-            }
-            return finalVal + '\n';
-        };
-
-        var csvFile = '';
-        for (var i = 0; i < rows.length; i++) {
-            csvFile += processRow(rows[i]);
-        }
-
-        var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
-        if (navigator.msSaveBlob) { // IE 10+
-            navigator.msSaveBlob(blob, filename);
-        } else {
-            var link = document.createElement("a");
-            if (link.download !== undefined) { // feature detection
-                // Browsers that support HTML5 download attribute
-                var url = URL.createObjectURL(blob);
-                link.setAttribute("href", url);
-                link.setAttribute("download", filename);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        }
-    }
-
-app.get("/exportData", function (request, result) {
- 
-
-// Start file download.
-download("hello.txt","This is the content of my file :)");
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function download(filename, text) {
-  var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-  element.setAttribute('download', filename);
-
-  element.style.display = 'none';
-  document.body.appendChild(element);
-
-  element.click();
-
-  document.body.removeChild(element);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.get('/', (req, res) => {
-
-
-
-
-
-	//client.query("SELECT * FROM scores;", (err, outcome) => {   
-	//	if (err) throw err;
-	//	else {
-	//		exportToCsv('lighthouseDatabase.csv',outcome.rows)
-	//		//res.send(outcome)
-	//		res.send("done")
-	//		console.log("done")
-	//	}
-	//})
-
-
-
-
-
-
-
-  //res.send('Hello World!')
-  //res.sendFile(path.join(__dirname + '/home.html'));
-	//client.query("SELECT * FROM scores;", (err, outcome) => {   
-	//		if (err) throw err;
-	//		else {
-	//			//res.send(outcome)
-//
-//
-	//			//var out=""
-	//			//out+="ALL DATA FROM DATABASE\n\n\n\n\n\n"
-	//			//out+="----------------------\n"
-	//			////calculating header width
-	//			//var rowWidth_rowID=7;
-	//			//var rowWidth_websiteURL=0;
-	//			//for (var i = 0; i < outcome.rows.length; i++) {
-	//			//	if (rowWidth_websiteURL<outcome.rows[i].websiteurl.length) {
-	//			//		rowWidth_websiteURL=outcome.rows[i].websiteurl.length;
-	//			//	}
-	//			//	
-	//			//}
-	//			//rowWidth_websiteURL+=2;
-	//			//
-	//			//var rowWidth_score=7;
-	//			//var rowWidth_date=26;
-	//			//var rowWidth_mainbrand=0;
-	//			//for (var i = 0; i < outcome.rows.length; i++) {
-	//			//	if (rowWidth_mainbrand<outcome.rows[i].mainbrand.length) {
-	//			//		rowWidth_mainbrand=outcome.rows[i].mainbrand.length;
-	//			//	}
-	//			//	
-	//			//}
-	//			//rowWidth_mainbrand+=2;
-	//			//
-	//			////headers
-	//			//out+=" row_ID | ";
-	//			//for (var i = 0; i < (rowWidth_websiteURL-10)/2; i++) {
-	//			//	out+=" "
-	//			//}
-	//			//out+="websiteUrl"
-	//			//for (var i = 0; i < (rowWidth_websiteURL-10)/2; i++) {
-	//			//	out+=" "
-	//			//}
-	//			//out+="| score |           date           |"
-	//			//
-	//			//if (rowWidth_mainbrand<=9) {
-	//			//	out+=" mainBrand |"
-	//			//}
-	//			//else{
-	//			//	for (var i = 0; i < (rowWidth_mainbrand-9)/2; i++) {
-	//			//		out+=" "
-	//			//	}
-	//			//	out+="mainBrand"
-	//			//	for (var i = 0; i < (rowWidth_mainbrand-9)/2; i++) {
-	//			//		out+=" "
-	//			//	}
-	//			//}
-	//			//out+="\n"
-	//			//
-	//			////populating table
-	//			//for (var i = 0; i < outcome.rows.length; i++) {
-	//			//	//ROW ID
-	//			//	out+=" "+outcome.rows[i].row_id;
-	//			//	if (outcome.rows[i].row_id<10) {
-	//			//		for (var i = 0; i < rowWidth_rowID-2; i++) {
-	//			//		out+=" ";
-	//			//		}
-	//			//	}
-	//			//	else if (outcome.rows[i].row_id<100) {
-	//			//			for (var i = 0; i < rowWidth_rowID-3; i++) {
-	//			//			out+=" ";
-	//			//			}
-	//			//	}
-	//			//	else if (outcome.rows[i].row_id<1000) {
-	//			//			for (var i = 0; i < rowWidth_rowID-4; i++) {
-	//			//			out+=" ";
-	//			//			}
-	//			//	}
-	//			//	out+="|"
-	//			//	//WebsiteURL
-	//			//	out+=" "+outcome.rows[i].websiteurl;
-	//			//	for (var i = 0; i < rowWidth_websiteURL-outcome.rows[i].websiteurl.length-1; i++) {
-	//			//		out+=" ";
-	//			//		}
-	//			//	
-	//			//	out+="|"
-	//			//	//SCORE
-	//			//	out+=" "+outcome.rows[i].score;
-	//			//	if (outcome.rows[i].score<10) {
-	//			//		for (var i = 0; i < rowWidth_rowID-2; i++) {
-	//			//		out+=" ";
-	//			//		}
-	//			//	}
-	//			//	else if (outcome.rows[i].score<100) {
-	//			//			for (var i = 0; i < rowWidth_rowID-3; i++) {
-	//			//			out+=" ";
-	//			//			}
-	//			//	}
-	//			//	else {
-	//			//		out+="  ";
-	//			//	}
-	//			//	out+="|"
-	//			//
-	//			//	//Date
-	//			//	out+=" "+outcome.rows[i].date+" |";
-	//			//
-	//			//	//MainBrand
-	//			//	out+=" "+outcome.rows[i].mainbrand;
-	//			//	for (var i = 0; i < rowWidth_mainbrand-1-outcome.rows[i].mainbrand.length; i++) {
-	//			//	out+=" ";
-	//			//	}
-	//			//	out+=" |";
-	//			//}
-//
-//
-//
-	//			res.send(out)
-	//			
-	//			//res.send("test")
-	//			
-//
-	//			//res.send("ShowAll requested: responded SUCCESS")
-	//		}
-	//	})
-
-
+	client.query("SELECT * FROM scores;", (err, outcome) => {   
+		if (err) throw err;
+		else {
+			res.send(outcome)
+			//res.send("done")
+			console.log("get /")
+		}
+	})
 
 })
 
@@ -355,7 +114,7 @@ app.get('/urls/radio1/deochtend',function(req,res){
 
 
 
-app.get('/testing/showall',function(req,res){
+app.get('/database/showall',function(req,res){
 	client.query("SELECT * FROM scores;", (err, outcome) => {   
 		if (err) throw err;
 		else {
@@ -365,6 +124,25 @@ app.get('/testing/showall',function(req,res){
 	})
 })
 
+app.get('/database/deleteall',function(req,res){
+	client.query("DELETE FROM scores WHERE row_id > 0;", (err, outcome) => {   
+		if (err) throw err;
+		else {
+			res.send(outcome)
+			console.log("DELETE ALL requested: responded SUCCESS")
+		}
+	})
+})
+
+app.get('/database/deleteone/:row_id',function(req,res){
+	client.query("DELETE FROM scores WHERE row_id = "+req.params.row_id+";", (err, outcome) => {   
+		if (err) throw err;
+		else {
+			res.send(outcome)
+			console.log("DELETE ONE requested: responded SUCCESS")
+		}
+	})
+})
 
 function FetchingURL(url,mainbrand,res){
 	console.log("Fetching PageSpeed info for url: "+url);
