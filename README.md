@@ -100,8 +100,8 @@ Assuming the project is already cloned from github
 2) Use the following command to interact with the database:
 ```heroku pg:psql```
    - When you have done this, you should be able to interact with the database and perform querries like for example:
-     -```CREATE TABLE scores (row_id serial PRIMARY KEY,websiteurl VARCHAR ( 255 ) NOT NULL,score INT NOT NULL,date TIMESTAMP NOT NULL,mainbrand VARCHAR ( 255 ) NOT NULL);```
-     -```INSERT INTO scores(websiteurl, score, date, mainbrand) VALUES ('https://www.vrt.be/vrtnu/', 80, '2021-04-04 10:57:40','VRT');```
+      - ```CREATE TABLE scores (row_id serial PRIMARY KEY,websiteurl VARCHAR ( 255 ) NOT NULL,score INT NOT NULL,date TIMESTAMP NOT NULL,mainbrand VARCHAR ( 255 ) NOT NULL);```
+      - ```INSERT INTO scores(websiteurl, score, date, mainbrand) VALUES ('https://www.vrt.be/vrtnu/', 80, '2021-04-04 10:57:40','VRT');```
 3) to quit interacting with the database, write following command:
 ```\q```
 4) To see information about the database, execute following command:
