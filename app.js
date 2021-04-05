@@ -28,7 +28,7 @@ app.listen(process.env.PORT || port, () => {
 })
 
 
-// Add Row To Database
+// VRT NU
 app.get('/urls/vrtnu/home',function(req,res){
 	FetchingURL("https://www.vrt.be/vrtnu/","VRT",res)
 })
@@ -45,6 +45,64 @@ app.get('/urls/vrtnu/livestream',function(req,res){
 	FetchingURL("https://www.vrt.be/vrtnu/livestream/","VRT",res)
 })
 
+
+// VRT NWS
+app.get('/urls/vrtnws/home',function(req,res){
+	FetchingURL("https://www.vrt.be/vrtnws/nl/","VRT",res)
+})
+app.get('/urls/vrtnws/kijk',function(req,res){
+	FetchingURL("https://www.vrt.be/vrtnws/nl/rubrieken/kijk/","VRT",res)
+})
+app.get('/urls/vrtnws/netbinnen',function(req,res){
+	FetchingURL("https://www.vrt.be/vrtnws/nl/net-binnen/","VRT",res)
+})
+app.get('/urls/vrtnws/corona',function(req,res){
+	FetchingURL("https://www.vrt.be/vrtnws/nl/dossiers/2020/01/coronavirus-china/","VRT",res)
+})
+app.get('/urls/vrtnws/luister',function(req,res){
+	FetchingURL("https://www.vrt.be/vrtnws/nl/rubrieken/luister/","VRT",res)
+})
+
+
+// SPORZA
+app.get('/urls/sporza/home',function(req,res){
+	FetchingURL("https://sporza.be/nl/","VRT",res)
+})
+app.get('/urls/sporza/programmagids',function(req,res){
+	FetchingURL("https://sporza.be/nl/programmagids/","VRT",res)
+})
+app.get('/urls/sporza/netbinnen',function(req,res){
+	FetchingURL("https://sporza.be/nl/pas-verschenen/","VRT",res)
+})
+app.get('/urls/sporza/video',function(req,res){
+	FetchingURL("https://sporza.be/nl/videozone/","VRT",res)
+})
+app.get('/urls/sporza/voetbal',function(req,res){
+	FetchingURL("https://sporza.be/nl/categorie/voetbal/","VRT",res)
+})
+
+
+// Radio 1
+app.get('/urls/radio1/home',function(req,res){
+	FetchingURL("https://radio1.be/","VRT",res)
+})
+app.get('/urls/radio1/programmagids',function(req,res){
+	FetchingURL("https://radio1.be/programmagids","VRT",res)
+})
+app.get('/urls/radio1/podcasts',function(req,res){
+	FetchingURL("https://radio1.be/de-podcasts-van-radio1","VRT",res)
+})
+app.get('/urls/radio1/select',function(req,res){
+	FetchingURL("https://radio1.be/luister/select","VRT",res)
+})
+app.get('/urls/radio1/deochtend',function(req,res){
+	FetchingURL("https://radio1.be/programma/de-ochtend","VRT",res)
+})
+
+
+
+
+
 app.get('/testing/showall',function(req,res){
 	client.query("SELECT * FROM scores;", (err, outcome) => {   
 		if (err) throw err;
@@ -53,7 +111,6 @@ app.get('/testing/showall',function(req,res){
 			console.log("ShowAll requested: responded SUCCESS")
 		}
 	})
-
 })
 
 
