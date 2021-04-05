@@ -4,6 +4,8 @@ const port = 3000
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const fetch = require("node-fetch");
 var path = require('path');
+var fileSystem = require("fs");
+var fastcsv = require("fast-csv");
 
 const { Client } = require('pg');
 //
@@ -59,16 +61,32 @@ function exportToCsv(filename, rows) {
             }
         }
     }
-    
-    
-    
-exportToCsv('export.csv', [
-	['name','description'],	
-  ['david','123'],
-  ['jona','""'],
-  ['a','b'],
 
-])
+app.get("/exportData", function (request, result) {
+ 
+        var data = [{
+            "id": 1,
+            "name": "Adnan",
+            "age": 29
+        }, {
+            "id": 2,
+            "name": "Ali",
+            "age": 31
+        }, {
+            "id": 3,
+            "name": "Ahmad",
+            "age": 33
+        }];
+ 
+        var ws = fileSystem.createWriteStream("public/data.csv");
+        fastcsv
+            .write(data, { headers: true })
+            .on("finish", function() {
+ 
+                result.send("<a href='/public/data.csv' download='data.csv' id='download-link'></a><script>document.getElementById('download-link').click();</script>");
+            })
+            .pipe(ws);
+    });
 
 app.get('/', (req, res) => {
 
