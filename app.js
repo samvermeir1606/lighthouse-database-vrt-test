@@ -110,7 +110,22 @@ app.get('/urls/radio1/deochtend',function(req,res){
 	FetchingURL("https://radio1.be/programma/de-ochtend","VRT",res)
 })
 
-
+app.get('/urls/debug/sporzahome',function(req,res){
+	fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url='+url+'&category=accessibility')
+		.then(response => {
+			response.json()
+			console.log("response: ")
+			console.log(response)})
+		.then(data => {
+			console.log("Got a response")
+			console.log(data)
+			console.log("Fetching PageSpeed info for url: "+url+" SUCCEEDED with score of: "+data.lighthouseResult.categories.accessibility.score*100)
+			console.log(data.lighthouseResult.categories.accessibility.score)
+			AddToDatabase(url,data.lighthouseResult.categories.accessibility.score*100,mainbrand)
+			res.send("DONE")
+			console.log("DONE")
+	  });
+})
 
 
 
