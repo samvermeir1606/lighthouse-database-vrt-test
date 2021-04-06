@@ -110,6 +110,12 @@ app.get('/urls/radio1/deochtend',function(req,res){
 	FetchingURL("https://radio1.be/programma/de-ochtend","VRT",res)
 })
 
+
+
+
+
+
+
 app.get('/urls/debug/sporzahome',function(req,res){
 	var url="https://sporza.be/nl/"
 	var fullurl='https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url='+url+'&category=accessibility'

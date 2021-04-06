@@ -109,7 +109,8 @@ Assuming the project is already cloned from github
 ```heroku pg:info```
 
 
-
+## Known Bugs
+Currently, for some urls (like the sporza home page and VRT NU az), Page Speed returns undefined. When I use postman to test the api url from PageSpeed, then it works but for some reason (I think a time-out) it returns undefined on my server.
 
 
 
