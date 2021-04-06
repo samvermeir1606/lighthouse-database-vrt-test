@@ -112,7 +112,9 @@ app.get('/urls/radio1/deochtend',function(req,res){
 
 app.get('/urls/debug/sporzahome',function(req,res){
 	var url="https://sporza.be/nl/"
-	fetch('https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url='+url+'&category=accessibility')
+	var fullurl='https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url='+url+'&category=accessibility'
+	console.log(fullurl)
+	fetch(fullurl)
 		.then(response => {
 			response.json()
 			console.log("response: ")
