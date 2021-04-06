@@ -114,7 +114,7 @@ app.get('/urls/debug/sporzahome',function(req,res){
 	var url="https://sporza.be/nl/"
 	var fullurl='https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url='+url+'&category=accessibility'
 	console.log(fullurl)
-	fetch(fullurl)
+	fetch("https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://sporza.be/nl/&category=accessibility")
 		.then(response => {
 			response.json()
 			console.log("response: ")
